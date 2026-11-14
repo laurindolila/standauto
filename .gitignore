@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Editores / sistema
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Documentação gerada pelo Sphinx
+docs/_build/
