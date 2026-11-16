@@ -1,6 +1,7 @@
 """Ponto de entrada da aplicação StandAuto."""
 
 import dados
+import operacoes
 
 MENU = """
 ==============================
@@ -22,7 +23,9 @@ def main():
     while True:
         print(MENU)
         opcao = input("Escolha uma opção: ").strip()
-        if opcao == "0":
+        if opcao == "1":
+            operacoes.registar_viatura(viaturas)
+        elif opcao == "0":
             dados.guardar(viaturas)
             print("Dados guardados. Até breve!")
             break
