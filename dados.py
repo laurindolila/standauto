@@ -3,7 +3,7 @@
 import json
 import os
 
-from standauto.viatura import Viatura
+from viatura import Viatura
 
 FICHEIRO = "viaturas.json"
 
