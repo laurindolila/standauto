@@ -39,3 +39,20 @@ def registar_viatura(viaturas):
     viaturas.append(Viatura(matricula, marca, modelo, ano, preco))
     dados.guardar(viaturas)
     print(f"Viatura {matricula} registada com sucesso.")
+
+def listar_viaturas(viaturas):
+    """Mostra na consola todas as viaturas do stand (US3).
+
+    Args:
+        viaturas (list[Viatura]): Lista de viaturas do stand.
+    """
+    print("\n--- Consultar viaturas ---")
+    if not viaturas:
+        print("Não há viaturas registadas.")
+        return
+    print(f"{'Matrícula':<10} {'Marca':<12} {'Modelo':<12} "
+          f"{'Ano':<6} {'Preço':>10}      Estado")
+    print("-" * 70)
+    for v in viaturas:
+        print(v)
+    print(f"\nTotal: {len(viaturas)} viatura(s).")
