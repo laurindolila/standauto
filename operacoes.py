@@ -40,6 +40,7 @@ def registar_viatura(viaturas):
     dados.guardar(viaturas)
     print(f"Viatura {matricula} registada com sucesso.")
 
+
 def listar_viaturas(viaturas):
     """Mostra na consola todas as viaturas do stand (US3).
 
