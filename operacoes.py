@@ -57,3 +57,36 @@ def listar_viaturas(viaturas):
     for v in viaturas:
         print(v)
     print(f"\nTotal: {len(viaturas)} viatura(s).")
+
+    
+
+def editar_viatura(viaturas):
+    """Altera os dados de uma viatura existente (US5).
+
+    Se o utilizador carregar Enter sem escrever nada, o valor atual mantém-se.
+
+    Args:
+        viaturas (list[Viatura]): Lista de viaturas do stand (é alterada).
+    """
+    print("\n--- Editar viatura ---")
+    matricula = input("Matrícula da viatura a editar: ")
+    v = procurar_por_matricula(viaturas, matricula)
+    if v is None:
+        print("Viatura não encontrada.")
+        return
+    print(f"Dados atuais: {v}")
+    print("(Carregue Enter para manter o valor atual)")
+    marca = input(f"Marca [{v.marca}]: ").strip()
+    modelo = input(f"Modelo [{v.modelo}]: ").strip()
+    ano = input(f"Ano [{v.ano}]: ").strip()
+    preco = input(f"Preço [{v.preco:.2f}]: ").strip().replace(",", ".")
+    if marca:
+        v.marca = marca
+    if modelo:
+        v.modelo = modelo
+    if ano:
+        v.ano = int(ano)
+    if preco:
+        v.preco = float(preco)
+    dados.guardar(viaturas)
+    print(f"Viatura {v.matricula} atualizada com sucesso.")
