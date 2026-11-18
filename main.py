@@ -25,6 +25,8 @@ def main():
         opcao = input("Escolha uma opção: ").strip()
         if opcao == "1":
             operacoes.registar_viatura(viaturas)
+        elif opcao == "2":
+            operacoes.listar_viaturas(viaturas)
         elif opcao == "0":
             dados.guardar(viaturas)
             print("Dados guardados. Até breve!")
