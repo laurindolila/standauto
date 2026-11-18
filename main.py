@@ -27,6 +27,8 @@ def main():
             operacoes.registar_viatura(viaturas)
         elif opcao == "2":
             operacoes.listar_viaturas(viaturas)
+        elif opcao == "3":
+            operacoes.editar_viatura(viaturas)
         elif opcao == "0":
             dados.guardar(viaturas)
             print("Dados guardados. Até breve!")
