@@ -90,3 +90,26 @@ def editar_viatura(viaturas):
         v.preco = float(preco)
     dados.guardar(viaturas)
     print(f"Viatura {v.matricula} atualizada com sucesso.")
+
+    
+
+def eliminar_viatura(viaturas):
+    """Remove uma viatura do stand, depois de pedir confirmação (US2).
+
+    Args:
+        viaturas (list[Viatura]): Lista de viaturas do stand (é alterada).
+    """
+    print("\n--- Eliminar viatura ---")
+    matricula = input("Matrícula da viatura a eliminar: ")
+    v = procurar_por_matricula(viaturas, matricula)
+    if v is None:
+        print("Viatura não encontrada.")
+        return
+    print(f"Vai eliminar: {v}")
+    confirmacao = input("Tem a certeza? (s/n): ").strip().lower()
+    if confirmacao != "s":
+        print("Operação cancelada.")
+        return
+    viaturas.remove(v)
+    dados.guardar(viaturas)
+    print(f"Viatura {v.matricula} eliminada com sucesso.")
