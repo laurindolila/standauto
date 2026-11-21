@@ -113,3 +113,23 @@ def eliminar_viatura(viaturas):
     viaturas.remove(v)
     dados.guardar(viaturas)
     print(f"Viatura {v.matricula} eliminada com sucesso.")
+
+    def pesquisar_viaturas(viaturas):
+        """Pesquisa viaturas por matrícula, marca ou modelo (US4)."""
+        print("\n--- Pesquisar viaturas ---")
+        termo = input("Matrícula, marca ou modelo: ").strip().lower()
+        if not termo:
+            print("Tem de escrever algo para pesquisar.")
+            return
+        encontradas = [
+            v for v in viaturas
+            if termo in v.matricula.lower()
+            or termo in v.marca.lower()
+            or termo in v.modelo.lower()
+        ]
+        if not encontradas:
+            print("Nenhuma viatura encontrada.")
+            return
+        for v in encontradas:
+            print(v)
+        print(f"\n{len(encontradas)} viatura(s) encontrada(s).")
