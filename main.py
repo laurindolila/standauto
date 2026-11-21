@@ -31,6 +31,8 @@ def main():
             operacoes.editar_viatura(viaturas)
         elif opcao == "4":
             operacoes.eliminar_viatura(viaturas)
+        elif opcao == "5":
+            operacoes.pesquisar_viaturas(viaturas)
         elif opcao == "0":
             dados.guardar(viaturas)
             print("Dados guardados. Até breve!")
