@@ -1,6 +1,7 @@
 """Operações sobre as viaturas do stand (CRUD)."""
 
 import dados
+import validacao
 from viatura import Viatura
 
 
@@ -28,14 +29,14 @@ def registar_viatura(viaturas):
         viaturas (list[Viatura]): Lista de viaturas do stand (é alterada).
     """
     print("\n--- Registar viatura ---")
-    matricula = input("Matrícula: ").strip().upper()
+    matricula = validacao.pedir_matricula()
     if procurar_por_matricula(viaturas, matricula):
         print("Já existe uma viatura com essa matrícula.")
         return
-    marca = input("Marca: ").strip()
-    modelo = input("Modelo: ").strip()
-    ano = input("Ano: ").strip()
-    preco = input("Preço (EUR): ").strip().replace(",", ".")
+    marca = validacao.pedir_texto("Marca: ")
+    modelo = validacao.pedir_texto("Modelo: ")
+    ano = validacao.pedir_ano("Ano: ")
+    preco = validacao.pedir_preco("Preço (EUR): ")
     viaturas.append(Viatura(matricula, marca, modelo, ano, preco))
     dados.guardar(viaturas)
     print(f"Viatura {matricula} registada com sucesso.")
