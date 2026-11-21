@@ -77,18 +77,18 @@ def editar_viatura(viaturas):
         return
     print(f"Dados atuais: {v}")
     print("(Carregue Enter para manter o valor atual)")
-    marca = input(f"Marca [{v.marca}]: ").strip()
-    modelo = input(f"Modelo [{v.modelo}]: ").strip()
-    ano = input(f"Ano [{v.ano}]: ").strip()
-    preco = input(f"Preço [{v.preco:.2f}]: ").strip().replace(",", ".")
+    marca = validacao.pedir_texto(f"Marca [{v.marca}]: ", permite_vazio=True)
+    modelo = validacao.pedir_texto(f"Modelo [{v.modelo}]: ", permite_vazio=True)
+    ano = validacao.pedir_ano(f"Ano [{v.ano}]: ", permite_vazio=True)
+    preco = validacao.pedir_preco(f"Preço [{v.preco:.2f}]: ", permite_vazio=True)
     if marca:
         v.marca = marca
     if modelo:
         v.modelo = modelo
-    if ano:
-        v.ano = int(ano)
-    if preco:
-        v.preco = float(preco)
+    if ano is not None:
+        v.ano = ano
+    if preco is not None:
+        v.preco = preco
     dados.guardar(viaturas)
     print(f"Viatura {v.matricula} atualizada com sucesso.")
 
