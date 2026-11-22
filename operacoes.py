@@ -116,7 +116,12 @@ def eliminar_viatura(viaturas):
     print(f"Viatura {v.matricula} eliminada com sucesso.")
 
 def pesquisar_viaturas(viaturas):
-    """Pesquisa viaturas por matrícula, marca ou modelo (US4)."""
+    """Pesquisa viaturas por matrícula, marca ou modelo (US4). 
+    
+    A pesquisa não distingue maiúsculas de minúsculas e aceita parte do texto.
+    Args:
+        viaturas (list[Viatura]): Lista de viaturas do stand.
+    """
     print("\n--- Pesquisar viaturas ---")
     termo = input("Matrícula, marca ou modelo: ").strip().lower()
     if not termo:
