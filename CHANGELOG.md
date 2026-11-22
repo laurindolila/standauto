@@ -11,3 +11,8 @@
 
 ### Corrigido
 - `.gitignore` passa a ignorar `viaturas.json` (#20)
+
+
+## [1.0.1] - 2026-11-22
+### Corrigido
+- Número da versão em `__init__.py` (estava 0.1.0)
