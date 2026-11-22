@@ -1,3 +1,3 @@
 """StandAuto - gestão de um stand de automóveis na consola."""
 
-__version__ = "0.1.0"
+__version__ = "1.0.1"
