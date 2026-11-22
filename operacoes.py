@@ -1,6 +1,7 @@
 """Operações sobre as viaturas do stand (CRUD)."""
 
 import dados
+import validacao
 from viatura import Viatura
 
 
@@ -28,14 +29,14 @@ def registar_viatura(viaturas):
         viaturas (list[Viatura]): Lista de viaturas do stand (é alterada).
     """
     print("\n--- Registar viatura ---")
-    matricula = input("Matrícula: ").strip().upper()
+    matricula = validacao.pedir_matricula()
     if procurar_por_matricula(viaturas, matricula):
         print("Já existe uma viatura com essa matrícula.")
         return
-    marca = input("Marca: ").strip()
-    modelo = input("Modelo: ").strip()
-    ano = input("Ano: ").strip()
-    preco = input("Preço (EUR): ").strip().replace(",", ".")
+    marca = validacao.pedir_texto("Marca: ")
+    modelo = validacao.pedir_texto("Modelo: ")
+    ano = validacao.pedir_ano("Ano: ")
+    preco = validacao.pedir_preco("Preço (EUR): ")
     viaturas.append(Viatura(matricula, marca, modelo, ano, preco))
     dados.guardar(viaturas)
     print(f"Viatura {matricula} registada com sucesso.")
@@ -58,7 +59,6 @@ def listar_viaturas(viaturas):
         print(v)
     print(f"\nTotal: {len(viaturas)} viatura(s).")
 
-    
 
 def editar_viatura(viaturas):
     """Altera os dados de uma viatura existente (US5).
@@ -76,22 +76,21 @@ def editar_viatura(viaturas):
         return
     print(f"Dados atuais: {v}")
     print("(Carregue Enter para manter o valor atual)")
-    marca = input(f"Marca [{v.marca}]: ").strip()
-    modelo = input(f"Modelo [{v.modelo}]: ").strip()
-    ano = input(f"Ano [{v.ano}]: ").strip()
-    preco = input(f"Preço [{v.preco:.2f}]: ").strip().replace(",", ".")
+    marca = validacao.pedir_texto(f"Marca [{v.marca}]: ", permite_vazio=True)
+    modelo = validacao.pedir_texto(f"Modelo [{v.modelo}]: ", permite_vazio=True)
+    ano = validacao.pedir_ano(f"Ano [{v.ano}]: ", permite_vazio=True)
+    preco = validacao.pedir_preco(f"Preço [{v.preco:.2f}]: ", permite_vazio=True)
     if marca:
         v.marca = marca
     if modelo:
         v.modelo = modelo
-    if ano:
-        v.ano = int(ano)
-    if preco:
-        v.preco = float(preco)
+    if ano is not None:
+        v.ano = ano
+    if preco is not None:
+        v.preco = preco
     dados.guardar(viaturas)
     print(f"Viatura {v.matricula} atualizada com sucesso.")
 
-    
 
 def eliminar_viatura(viaturas):
     """Remove uma viatura do stand, depois de pedir confirmação (US2).
@@ -114,7 +113,32 @@ def eliminar_viatura(viaturas):
     dados.guardar(viaturas)
     print(f"Viatura {v.matricula} eliminada com sucesso.")
 
+
+def pesquisar_viaturas(viaturas):
+    """Pesquisa viaturas por matrícula, marca ou modelo (US4). 
     
+    A pesquisa não distingue maiúsculas de minúsculas e aceita parte do texto.
+    Args:
+        viaturas (list[Viatura]): Lista de viaturas do stand.
+    """
+    print("\n--- Pesquisar viaturas ---")
+    termo = input("Matrícula, marca ou modelo: ").strip().lower()
+    if not termo:
+        print("Tem de escrever algo para pesquisar.")
+        return
+    encontradas = [
+        v for v in viaturas
+        if termo in v.matricula.lower()
+        or termo in v.marca.lower()
+        or termo in v.modelo.lower()
+    ]
+    if not encontradas:
+        print("Nenhuma viatura encontrada.")
+        return
+    for v in encontradas:
+        print(v)
+    print(f"\n{len(encontradas)} viatura(s) encontrada(s).")
+
 
 def vender_viatura(viaturas):
     """Regista a venda de uma viatura, mudando o estado para "vendida" (US13).
