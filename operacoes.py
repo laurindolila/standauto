@@ -59,7 +59,6 @@ def listar_viaturas(viaturas):
         print(v)
     print(f"\nTotal: {len(viaturas)} viatura(s).")
 
-    
 
 def editar_viatura(viaturas):
     """Altera os dados de uma viatura existente (US5).
@@ -92,7 +91,6 @@ def editar_viatura(viaturas):
     dados.guardar(viaturas)
     print(f"Viatura {v.matricula} atualizada com sucesso.")
 
-    
 
 def eliminar_viatura(viaturas):
     """Remove uma viatura do stand, depois de pedir confirmação (US2).
@@ -114,6 +112,7 @@ def eliminar_viatura(viaturas):
     viaturas.remove(v)
     dados.guardar(viaturas)
     print(f"Viatura {v.matricula} eliminada com sucesso.")
+
 
 def pesquisar_viaturas(viaturas):
     """Pesquisa viaturas por matrícula, marca ou modelo (US4). 
@@ -139,3 +138,28 @@ def pesquisar_viaturas(viaturas):
     for v in encontradas:
         print(v)
     print(f"\n{len(encontradas)} viatura(s) encontrada(s).")
+
+
+def vender_viatura(viaturas):
+    """Regista a venda de uma viatura, mudando o estado para "vendida" (US13).
+
+    Args:
+        viaturas (list[Viatura]): Lista de viaturas do stand (é alterada).
+    """
+    print("\n--- Vender viatura ---")
+    matricula = input("Matrícula da viatura a vender: ")
+    v = procurar_por_matricula(viaturas, matricula)
+    if v is None:
+        print("Viatura não encontrada.")
+        return
+    if v.esta_vendida():
+        print(f"A viatura {v.matricula} já foi vendida.")
+        return
+    print(f"Vai vender: {v}")
+    confirmacao = input("Confirmar a venda? (s/n): ").strip().lower()
+    if confirmacao != "s":
+        print("Venda cancelada.")
+        return
+    v.vender()
+    dados.guardar(viaturas)
+    print(f"Viatura {v.matricula} vendida por {v.preco:.2f} EUR. Parabéns pela venda!")

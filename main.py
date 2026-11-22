@@ -33,6 +33,8 @@ def main():
             operacoes.eliminar_viatura(viaturas)
         elif opcao == "5":
             operacoes.pesquisar_viaturas(viaturas)
+        elif opcao == "6":
+            operacoes.vender_viatura(viaturas)
         elif opcao == "0":
             dados.guardar(viaturas)
             print("Dados guardados. Até breve!")

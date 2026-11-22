@@ -65,3 +65,16 @@ class Viatura:
         """Devolve a viatura numa linha formatada para a consola."""
         return (f"{self.matricula:<10} {self.marca:<12} {self.modelo:<12} "
                 f"{self.ano:<6} {self.preco:>10.2f} EUR  {self.estado}")
+
+    
+    def esta_vendida(self):
+        """Indica se a viatura já foi vendida.
+
+        Returns:
+            bool: True se o estado for "vendida".
+        """
+        return self.estado == ESTADO_VENDIDA
+
+    def vender(self):
+        """Marca a viatura como vendida."""
+        self.estado = ESTADO_VENDIDA
